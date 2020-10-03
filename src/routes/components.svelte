@@ -2,7 +2,7 @@
   <title>components</title>
 </svelte:head>
 
-<h1>Components</h1>
+<h3>Min width tabs</h3>
 
 <script lang="ts">
   import Tab, {Icon, Label} from '@smui/tab/bare.js';

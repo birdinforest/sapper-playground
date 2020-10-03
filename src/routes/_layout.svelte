@@ -1,7 +1,15 @@
 <script lang="ts">
 	import Nav from '../components/Nav.svelte';
 
-	export let segment: string;
+	export const TABS = [
+		{ id: 'tab-home', icon: 'fas fa-plus', label: 'Home', url: '.'},
+		{ id: 'tab-component', icon: 'fas fa-plus', label: 'Component', url: 'components'},
+		{ id: 'tab-svelte-gl', icon: 'fas fa-arrows-alt', label: 'Svelte-gl', url: 'svelte-gl' },
+		{ id: 'tab-about', icon: 'fas fa-arrows-alt', label: 'About', url: 'about' },
+		{ id: 'tab-blog', icon: 'fas fa-arrows-alt', label: 'Blog', url: 'blog' },
+	];
+
+	export let segment = 'index';
 </script>
 
 <style>
@@ -15,7 +23,7 @@
 	}
 </style>
 
-<Nav {segment}/>
+<Nav {TABS}/>
 
 <main>
 	<slot></slot>

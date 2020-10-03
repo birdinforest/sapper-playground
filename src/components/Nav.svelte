@@ -1,6 +1,37 @@
 <script lang="ts">
+	import Tab, {Icon, Label} from '@smui/tab/bare.js';
+	import '@smui/tab/bare.css';
+	import TabBar from '@smui/tab-bar/bare.js';
+	import '@smui/tab-bar/bare.css';
 
-	export let segment: string;
+	import {goto, prefetch} from '@sapper/app';
+
+	// Receive tabs from `_layout.svelte`.
+	export let TABS: object[] = [];
+
+	// Current active tab.
+	let activeTab: object;
+
+	// Navigate to other page then process after navigation done.
+	// https://sapper.svelte.dev/docs#goto_href_options
+	const navigateAndSave = async (tab) => {
+	  // Navigate to.
+	  await goto(tab.url);
+		// Postprocess after navigation.
+		onNavigationFinished();
+	}
+
+	const onNavigationFinished = () => {
+		// do something with the database
+	}
+
+	// Prefetch page
+	// https://sapper.svelte.dev/docs#prefetch_href
+	const prefetchPage = async (tab) => {
+		// console.log('on hover', tab);
+		const result = await prefetch(tab.url);
+		// console.log('prefetch done: ', result);
+	}
 
 </script>
 
@@ -50,16 +81,10 @@
 	}
 </style>
 
-
 <nav>
-	<ul>
-		<li><a aria-current="{segment === undefined ? 'page' : undefined}" href=".">home</a></li>
-		<li><a aria-current="{segment === 'components' ? 'page' : undefined}" href="components">components</a></li>
-		<li><a aria-current="{segment === 'svelte-gl' ? 'page' : undefined}" href="svelte-gl">svelte-gl</a></li>
-		<li><a aria-current="{segment === 'about' ? 'page' : undefined}" href="about">about</a></li>
-
-		<!-- for the blog link, we're using rel=prefetch so that Sapper prefetches
-		     the blog data when we hover over the link or tap it on a touchscreen -->
-		<li><a rel=prefetch aria-current="{segment === 'blog' ? 'page' : undefined}" href="blog">blog</a></li>
-	</ul>
+	<TabBar tabs={TABS} let:tab bind:active={activeTab}>
+		<Tab {tab} on:click={()=>navigateAndSave(tab)}  on:mouseover={()=>prefetchPage(tab)}>
+			<Label>{tab.label}</Label>
+		</Tab>
+	</TabBar>
 </nav>
