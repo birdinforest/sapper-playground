@@ -32,7 +32,7 @@ export default {
 				dev,
 				hydratable: true,
 				preprocess: sveltePreprocess(),
-				emitCss: true
+				emitCss: false
 			}),
 			resolve({
 				browser: true,

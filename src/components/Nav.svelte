@@ -1,5 +1,7 @@
 <script lang="ts">
+
 	export let segment: string;
+
 </script>
 
 <style>
@@ -48,9 +50,12 @@
 	}
 </style>
 
+
 <nav>
 	<ul>
 		<li><a aria-current="{segment === undefined ? 'page' : undefined}" href=".">home</a></li>
+		<li><a aria-current="{segment === 'components' ? 'page' : undefined}" href="components">components</a></li>
+		<li><a aria-current="{segment === 'svelte-gl' ? 'page' : undefined}" href="svelte-gl">svelte-gl</a></li>
 		<li><a aria-current="{segment === 'about' ? 'page' : undefined}" href="about">about</a></li>
 
 		<!-- for the blog link, we're using rel=prefetch so that Sapper prefetches

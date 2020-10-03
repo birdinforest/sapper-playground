@@ -38,6 +38,12 @@
 
 <h1>Great success!</h1>
 
+<script>
+	import Sample from '../components/Sample.svelte';
+</script>
+
+<Sample/>
+
 <figure>
 	<img alt='Success Kid' src='successkid.jpg'>
 	<figcaption>Have fun with Sapper!</figcaption>
