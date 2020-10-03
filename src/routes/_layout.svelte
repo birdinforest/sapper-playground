@@ -8,8 +8,6 @@
 		{ id: 'tab-about', icon: 'fas fa-arrows-alt', label: 'About', url: 'about' },
 		{ id: 'tab-blog', icon: 'fas fa-arrows-alt', label: 'Blog', url: 'blog' },
 	];
-
-	export let segment = 'index';
 </script>
 
 <style>

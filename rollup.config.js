@@ -8,6 +8,7 @@ import sveltePreprocess from 'svelte-preprocess';
 import typescript from '@rollup/plugin-typescript';
 import config from 'sapper/config/rollup.js';
 import pkg from './package.json';
+import glslify from 'rollup-plugin-glslify';
 
 const mode = process.env.NODE_ENV;
 const dev = mode === 'development';
@@ -32,7 +33,7 @@ export default {
 				dev,
 				hydratable: true,
 				preprocess: sveltePreprocess(),
-				emitCss: false
+				emitCss: true
 			}),
 			resolve({
 				browser: true,
@@ -60,7 +61,10 @@ export default {
 
 			!dev && terser({
 				module: true
-			})
+			}),
+
+			// Import shader
+			glslify()
 		],
 
 		preserveEntrySignatures: false,
@@ -85,7 +89,10 @@ export default {
 				dedupe: ['svelte']
 			}),
 			commonjs(),
-			typescript({ sourceMap: dev })
+			typescript({ sourceMap: dev }),
+
+			// Import shader
+			glslify()
 		],
 		external: Object.keys(pkg.dependencies).concat(require('module').builtinModules),
 
@@ -104,7 +111,7 @@ export default {
 			}),
 			commonjs(),
 			typescript({ sourceMap: dev }),
-			!dev && terser()
+			!dev && terser(),
 		],
 
 		preserveEntrySignatures: false,
