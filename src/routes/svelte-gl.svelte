@@ -91,6 +91,11 @@
             intensity={0.6}
     />
   </GL.Group>
+
+  <GL.Model  url={'models/BoxTextured/glTF/BoxTextured.gltf'} loader={new GL.GLTFLoader()}>
+
+  </GL.Model>
+
 </GL.Scene>
 
 <div class="controls">
